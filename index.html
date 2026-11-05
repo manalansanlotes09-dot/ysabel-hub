@@ -162,9 +162,9 @@ footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;color:v
 
 <script>
 // ===== EDIT YOUR PRODUCTS HERE =====
-// price  : peso price, or null to show only the dollar price
-// usd    : dollar price
-// link   : where the button goes. A checkout page, or your Payhip/Gumroad product URL.
+// price : peso price, or null to show only the dollar price
+// usd   : dollar price
+// link  : where the buy button goes (a checkout page, or a Payhip/Gumroad product URL)
 const PRODUCTS=[
  {cat:'AI Tools',icon:'🤖',bg:'#efe4f5',name:'AI Prompt Pack for Online Sellers',desc:'150 prompts for Shopee, Lazada and TikTok Shop: listings, captions, replies and promos.',price:299,usd:5.99,link:'',isNew:true},
  {cat:'AI Tools',icon:'🎬',bg:'#e3eef0',name:'Content Creator AI Kit',desc:'30 days of Reels/TikTok scripts, hooks and caption prompts in English and Taglish.',price:349,usd:6.99,link:''},
@@ -174,7 +174,7 @@ const PRODUCTS=[
  {cat:'Travel',icon:'🏝️',bg:'#dff0ee',name:'Palawan 5-Day Itinerary Guide',desc:'El Nido + Coron routes, budget breakdown, island hopping tips and booking checklist.',price:249,usd:4.99,link:''},
  {cat:'Travel',icon:'🌊',bg:'#e0ebf6',name:'Siargao & Bohol Budget Guides',desc:'Two guides: where to stay, eat and explore on ₱10k or less.',price:299,usd:5.99,link:''},
  {cat:'Creative',icon:'🎨',bg:'#f8e6e2',name:'Canva Social Media Templates',desc:'60 editable posts and stories in the soft, modern Ysabel style.',price:299,usd:5.99,link:''},
- {cat:'Creative',icon:'🗓️',bg:'#f3eedf',name:'2027 Premium Digital Planner',desc:'465-page hyperlinked planner for GoodNotes and Notability: yearly, monthly, weekly, daily, finance, wellness and travel sections.',price:null,usd:9.99,link:'checkout.html',isNew:true}
+ {cat:'Creative',icon:'🗓️',bg:'#f3eedf',name:'2027 Premium Digital Planner',desc:'465-page hyperlinked planner for GoodNotes and Notability: yearly, monthly, weekly, daily, finance, wellness and travel sections.',price:630,usd:9.99,link:'checkout.html',isNew:true}
 ];
 const $=id=>document.getElementById(id);$('yr').textContent=new Date().getFullYear();
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
