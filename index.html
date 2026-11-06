@@ -42,7 +42,8 @@ section{padding:56px 0}
 .cat{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);font-weight:600}
 .prod h3{font-size:17px;margin:4px 0 6px}
 .prod p{font-size:14px;color:var(--muted);flex:1}
-.buy{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.buy{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px}
+.btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .price{font-weight:700;font-size:18px}.price small{font-weight:400;color:var(--muted);font-size:13px}
 .btn{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:10px 16px;cursor:pointer;font-size:14px;text-decoration:none;white-space:nowrap}
 .btn.alt{background:var(--accent2)}
@@ -146,8 +147,8 @@ footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;color:v
 
 <section id="faq"><div class="wrap" style="max-width:760px">
   <div class="sec-h"><h2>FAQ</h2></div>
-  <details><summary>How do I get my product after paying?</summary><p>Gumroad emails your download link right after payment, and you can also download straight from the receipt page.</p></details>
-  <details><summary>What payment methods do you accept?</summary><p>Checkout is handled securely by Gumroad. You can pay by credit/debit card or PayPal. Prices are in US dollars, and Gumroad can show the amount in your local currency at checkout.</p></details>
+  <details><summary>How do I get my product after paying?</summary><p>Gumroad emails your download link right after payment, and you can also download straight from the receipt page. Items bought on Etsy arrive through Etsy Downloads.</p></details>
+  <details><summary>What payment methods do you accept?</summary><p>Checkout is handled securely by Gumroad or Etsy. You can pay by credit/debit card or PayPal. Prices are in US dollars, and both can show the amount in your local currency at checkout.</p></details>
   <details><summary>Do I need special software?</summary><p>Most templates open in free Google Sheets, Notion or Canva. Guides are PDFs you can read on any phone.</p></details>
   <details><summary>Can I use the templates for my business?</summary><p>Yes, for your own personal or business use. Reselling or sharing the files is not allowed.</p></details>
 </div></section>
@@ -164,11 +165,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;color:v
 // ===== EDIT YOUR PRODUCTS HERE =====
 // price : peso price shown beside the dollar price, or null to show dollars only
 // usd   : dollar price (what checkout charges)
-// link  : where the buy button goes (a Gumroad/Payhip product URL)
+// link  : the first Buy button (Gumroad)
+// alt    : an optional second Buy button (Etsy)
 const PRODUCTS=[
  {cat:'AI Tools',icon:'🤖',bg:'#efe4f5',name:'AI Prompt Pack for Online Sellers',desc:'150 prompts for Shopee, Lazada and TikTok Shop: listings, captions, replies and promos.',price:299,usd:5.99,link:'',isNew:true},
  {cat:'AI Tools',icon:'🎬',bg:'#e3eef0',name:'Content Creator AI Kit',desc:'30 days of Reels/TikTok scripts, hooks and caption prompts in English and Taglish.',price:349,usd:6.99,link:''},
- {cat:'Templates',icon:'💰',bg:'#e7f1e4',name:'Peso Budget & Ipon Planner',desc:'8 connected sheets for Google Sheets and Excel: monthly budget, annual overview, transaction log, 52-week ipon challenge, bills, debt payoff and dashboard.',price:317,usd:4.99,link:'https://ysabelcreativeco.gumroad.com/l/peso-budget-and-ipon-planner',isNew:true},
+ {cat:'Templates',icon:'💰',bg:'#e7f1e4',name:'Peso Budget & Ipon Planner',desc:'8 connected sheets for Google Sheets and Excel: monthly budget, annual overview, transaction log, 52-week ipon challenge, bills, debt payoff and dashboard.',price:317,usd:4.99,link:'https://ysabelcreativeco.gumroad.com/l/peso-budget-and-ipon-planner',alt:'https://www.etsy.com/listing/4610995436/peso-budget-planner-google-sheets-excel',isNew:true},
  {cat:'Templates',icon:'📦',bg:'#f6ebdd',name:'Small Business Starter Sheets',desc:'Inventory, orders, sales and profit dashboard for sari-sari, online and home businesses.',price:399,usd:7.99,link:''},
  {cat:'Templates',icon:'💼',bg:'#e4e9f5',name:'Freelancer & VA Toolkit',desc:'Resume, portfolio, proposal and client tracker templates for virtual assistants.',price:349,usd:6.99,link:''},
  {cat:'Travel',icon:'🏝️',bg:'#dff0ee',name:'Palawan 5-Day Itinerary Guide',desc:'El Nido + Coron routes, budget breakdown, island hopping tips and booking checklist.',price:249,usd:4.99,link:''},
@@ -180,9 +182,9 @@ const $=id=>document.getElementById(id);$('yr').textContent=new Date().getFullYe
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
 function shop(cat){$('products').innerHTML='';PRODUCTS.filter(p=>cat==='All'||p.cat===cat).forEach(p=>{
   const d=document.createElement('div');d.className='card prod';
-  d.innerHTML=`${p.isNew?'<span class="tag-new">NEW</span>':''}<div class="thumb" style="background:${p.bg}">${p.icon}</div><div class="cat">${p.cat}</div><h3></h3><p></p><div class="buy"><div class="price">${p.price?'₱'+p.price+' <small>/ $'+p.usd+'</small>':'$'+p.usd+' <small>USD</small>'}</div><a class="btn" ${p.link?`href="${p.link}" target="_blank" rel="noopener"`:'href="#"'}>${p.link?'Buy now':'Coming soon'}</a></div>`;
+  d.innerHTML=`${p.isNew?'<span class="tag-new">NEW</span>':''}<div class="thumb" style="background:${p.bg}">${p.icon}</div><div class="cat">${p.cat}</div><h3></h3><p></p><div class="buy"><div class="price">${p.price?'₱'+p.price+' <small>/ $'+p.usd+'</small>':'$'+p.usd+' <small>USD</small>'}</div><span class="btns">${p.link?`<a class="btn" href="${p.link}" target="_blank" rel="noopener">Gumroad</a>`:''}${p.alt?`<a class="btn alt" href="${p.alt}" target="_blank" rel="noopener">Etsy</a>`:''}${(!p.link&&!p.alt)?`<a class="btn" href="#">Coming soon</a>`:''}</span></div>`;
   d.querySelector('h3').textContent=p.name;d.querySelector('p').textContent=p.desc;
-  if(!p.link)d.querySelector('.btn').onclick=e=>{e.preventDefault();toast('Launching soon! Join the list below to be notified.')};
+  if(!p.link&&!p.alt)d.querySelector('.btn').onclick=e=>{e.preventDefault();toast('Launching soon! Join the list below to be notified.')};
   $('products').appendChild(d);});}
 ['All',...new Set(PRODUCTS.map(p=>p.cat))].forEach((c,i)=>{const b=document.createElement('button');b.textContent=c;if(!i)b.className='active';
   b.onclick=()=>{document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');shop(c)};$('filters').appendChild(b)});shop('All');
